@@ -1,7 +1,6 @@
-
 import React, { useState } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
-import { Wallet, Stack, Clock, PieChart, Award } from 'lucide-react';
+import { Wallet, Layers, Clock, PieChart, Award } from 'lucide-react';
 import { TabsContent } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
@@ -94,7 +93,7 @@ const Dashboard = () => {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Staked Amount</CardTitle>
-              <Stack className="h-5 w-5 text-token-blue" />
+              <Layers className="h-5 w-5 text-token-blue" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{userData.stakedAmount}</div>
