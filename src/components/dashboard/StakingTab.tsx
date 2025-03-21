@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
@@ -13,6 +12,7 @@ interface StakingData {
   tokenBalance: string;
   stakedAmount: string;
   claimableRewards: string;
+  stakingTier?: string;
 }
 
 const StakingTab: React.FC<{userData: StakingData}> = ({ userData }) => {
@@ -26,7 +26,6 @@ const StakingTab: React.FC<{userData: StakingData}> = ({ userData }) => {
   const [isUnstaking, setIsUnstaking] = useState(false);
   const [stakingInfo, setStakingInfo] = useState<StakingInfo | null>(null);
 
-  // Fetch staking info when address is available
   useEffect(() => {
     const fetchStakingInfo = async () => {
       if (!address || !provider) return;
@@ -40,7 +39,6 @@ const StakingTab: React.FC<{userData: StakingData}> = ({ userData }) => {
     };
 
     fetchStakingInfo();
-    // Refresh every 30 seconds
     const interval = setInterval(fetchStakingInfo, 30000);
     return () => clearInterval(interval);
   }, [address, provider]);
@@ -80,11 +78,9 @@ const StakingTab: React.FC<{userData: StakingData}> = ({ userData }) => {
         description: `Successfully staked ${stakeAmount} tokens`,
       });
       
-      // Refresh staking info
       const info = await web3Service.getStakingInfo(address);
       setStakingInfo(info);
       
-      // Clear input
       setStakeAmount('');
     } catch (error: any) {
       console.error('Staking error:', error);
@@ -117,7 +113,6 @@ const StakingTab: React.FC<{userData: StakingData}> = ({ userData }) => {
         description: "Successfully unstaked your tokens",
       });
       
-      // Refresh staking info
       const info = await web3Service.getStakingInfo(address);
       setStakingInfo(info);
     } catch (error: any) {
@@ -151,7 +146,6 @@ const StakingTab: React.FC<{userData: StakingData}> = ({ userData }) => {
         description: "Successfully claimed your rewards",
       });
       
-      // Refresh staking info
       const info = await web3Service.getStakingInfo(address);
       setStakingInfo(info);
     } catch (error: any) {
@@ -176,7 +170,6 @@ const StakingTab: React.FC<{userData: StakingData}> = ({ userData }) => {
     const period = e.target.value;
     setLockPeriod(period);
     
-    // Update APY based on lock period
     switch (period) {
       case '30':
         setApy('8');
@@ -195,7 +188,6 @@ const StakingTab: React.FC<{userData: StakingData}> = ({ userData }) => {
     }
   };
 
-  // Calculate estimated rewards
   const calculateEstimatedRewards = () => {
     if (!stakeAmount) return '0';
     const amount = parseFloat(stakeAmount);
@@ -204,7 +196,6 @@ const StakingTab: React.FC<{userData: StakingData}> = ({ userData }) => {
     return ((amount * apr * days) / 365).toFixed(2);
   };
 
-  // Calculate new tier after staking
   const getNewTier = () => {
     if (!stakeAmount) return userData.stakingTier || 'Bronze';
     
