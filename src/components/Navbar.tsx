@@ -2,11 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import { cn } from "@/lib/utils";
 import { Link, useLocation } from 'react-router-dom';
+import { useWallet } from '@/hooks/useWallet';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { isConnected, address, connectWallet } = useWallet();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,6 +26,12 @@ const Navbar = () => {
 
   const isHomePage = location.pathname === '/';
   const isActive = (path: string) => location.pathname === path;
+
+  // Format address for display
+  const formatAddress = (addr: string | null) => {
+    if (!addr) return '';
+    return `${addr.substring(0, 6)}...${addr.substring(addr.length - 4)}`;
+  };
 
   return (
     <header
@@ -75,9 +83,18 @@ const Navbar = () => {
         </nav>
         
         <div className="flex items-center gap-4">
-          <Link to="/dashboard" className="button-hover-effect inline-flex items-center justify-center rounded-full bg-token-blue px-5 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-token-darkBlue transition-all duration-200">
-            Connect Wallet
-          </Link>
+          {isConnected ? (
+            <Link to="/dashboard" className="inline-flex items-center justify-center rounded-full bg-token-blue/10 px-5 py-2.5 text-sm font-medium text-token-blue shadow-sm hover:bg-token-blue/20 transition-all duration-200">
+              {formatAddress(address)}
+            </Link>
+          ) : (
+            <button 
+              onClick={connectWallet}
+              className="button-hover-effect inline-flex items-center justify-center rounded-full bg-token-blue px-5 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-token-darkBlue transition-all duration-200"
+            >
+              Connect Wallet
+            </button>
+          )}
           
           <button 
             className="md:hidden flex items-center justify-center p-2 rounded-md text-token-darkGray hover:text-token-blue transition-colors duration-200"

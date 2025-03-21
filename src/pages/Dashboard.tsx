@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { TabsContent } from "@/components/ui/tabs";
 import DashboardLayout from '@/components/dashboard/DashboardLayout';
@@ -9,17 +9,13 @@ import StakingTab from '@/components/dashboard/StakingTab';
 import VestingTab from '@/components/dashboard/VestingTab';
 import RewardsTab from '@/components/dashboard/RewardsTab';
 import BenefitsTab from '@/components/dashboard/BenefitsTab';
+import { useWallet } from '@/hooks/useWallet';
 
 const Dashboard = () => {
   const { tab = 'overview' } = useParams();
-  const [isWalletConnected, setIsWalletConnected] = useState(false);
+  const { isConnected, address, balance } = useWallet();
   
-  // Simulated wallet connection
-  const handleConnectWallet = () => {
-    setIsWalletConnected(true);
-  };
-  
-  // Simulated user data
+  // Simulated user data - in a real implementation, this would come from the blockchain
   const userData = {
     tokenBalance: '50,000',
     stakedAmount: '30,000',
@@ -51,15 +47,19 @@ const Dashboard = () => {
     ]
   };
   
-  if (!isWalletConnected) {
-    return <WalletConnect onConnect={handleConnectWallet} />;
+  if (!isConnected) {
+    return <WalletConnect />;
   }
   
   return (
     <DashboardLayout activeTab={tab}>
       {/* Overview Tab */}
       <TabsContent value="overview">
-        <Overview userData={userData} />
+        <Overview userData={{
+          ...userData,
+          walletAddress: address || "",
+          ethBalance: balance || "0"
+        }} />
       </TabsContent>
       
       {/* Staking Tab */}
