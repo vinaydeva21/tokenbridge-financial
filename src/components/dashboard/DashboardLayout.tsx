@@ -4,6 +4,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Navbar from '../Navbar';
 import Footer from '../Footer';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 interface DashboardLayoutProps {
   children: ReactNode;
@@ -11,6 +12,12 @@ interface DashboardLayoutProps {
 }
 
 const DashboardLayout = ({ children, activeTab }: DashboardLayoutProps) => {
+  const navigate = useNavigate();
+  
+  const handleTabChange = (value: string) => {
+    navigate(`/dashboard/${value}`);
+  };
+  
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Navbar />
@@ -21,7 +28,7 @@ const DashboardLayout = ({ children, activeTab }: DashboardLayoutProps) => {
             <p className="text-token-gray">Manage your tokens, staking, and benefits</p>
           </div>
           
-          <Tabs defaultValue={activeTab} className="w-full">
+          <Tabs defaultValue={activeTab} value={activeTab} onValueChange={handleTabChange} className="w-full">
             <TabsList className="mb-8">
               <TabsTrigger value="overview">Overview</TabsTrigger>
               <TabsTrigger value="staking">Staking</TabsTrigger>
