@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { TabsContent } from "@/components/ui/tabs";
 import DashboardLayout from '@/components/dashboard/DashboardLayout';
@@ -10,11 +10,10 @@ import VestingTab from '@/components/dashboard/VestingTab';
 import RewardsTab from '@/components/dashboard/RewardsTab';
 import BenefitsTab from '@/components/dashboard/BenefitsTab';
 import { useWallet } from '@/hooks/useWallet';
-import web3Service from '@/services/web3Service';
 
 const Dashboard = () => {
   const { tab = 'overview' } = useParams();
-  const { isConnected, address, balance, provider, chainId } = useWallet();
+  const { isConnected, address, balance } = useWallet();
   
   // Simulated user data - in a real implementation, this would come from the blockchain
   const userData = {
@@ -47,15 +46,6 @@ const Dashboard = () => {
       { period: 'Q4 2023', amount: '250', status: 'Available' }
     ]
   };
-  
-  // Check for the correct network
-  useEffect(() => {
-    if (isConnected && provider && chainId !== 42161) {
-      // Alert user they are on the wrong network
-      console.log("Wrong network detected. Please switch to Arbitrum.");
-      // You could trigger a UI notification or auto-switch here
-    }
-  }, [isConnected, provider, chainId]);
   
   if (!isConnected) {
     return <WalletConnect />;

@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import { useToast } from './use-toast';
-import web3Service from '@/services/web3Service';
 
 interface WalletState {
   address: string | null;
@@ -12,7 +11,6 @@ interface WalletState {
   isConnecting: boolean;
   isConnected: boolean;
   error: string | null;
-  tokenBalance: string | null;
 }
 
 const initialState: WalletState = {
@@ -23,7 +21,6 @@ const initialState: WalletState = {
   isConnecting: false,
   isConnected: false,
   error: null,
-  tokenBalance: null,
 };
 
 export const useWallet = () => {
@@ -117,18 +114,6 @@ export const useWallet = () => {
       // Get ETH balance
       const balanceWei = await provider.getBalance(address);
       const balance = ethers.utils.formatEther(balanceWei);
-      
-      // Initialize the web3 service
-      web3Service.initialize(provider);
-      
-      // Get token balance if on the right network
-      let tokenBalance = null;
-      try {
-        tokenBalance = await web3Service.getTokenBalance(address);
-      } catch (error) {
-        console.error("Error getting token balance:", error);
-        // Don't throw here, just set tokenBalance to null
-      }
 
       setWalletState({
         address,
@@ -138,7 +123,6 @@ export const useWallet = () => {
         isConnecting: false,
         isConnected: true,
         error: null,
-        tokenBalance,
       });
 
       toast({
@@ -180,17 +164,6 @@ export const useWallet = () => {
       const balanceWei = await provider.getBalance(address);
       const balance = ethers.utils.formatEther(balanceWei);
 
-      // Initialize the web3 service
-      web3Service.initialize(provider);
-      
-      // Get token balance if on right network
-      let tokenBalance = null;
-      try {
-        tokenBalance = await web3Service.getTokenBalance(address);
-      } catch (error) {
-        console.error("Error getting token balance:", error);
-      }
-
       setWalletState({
         address,
         balance,
@@ -199,7 +172,6 @@ export const useWallet = () => {
         isConnecting: false,
         isConnected: true,
         error: null,
-        tokenBalance,
       });
     } catch (error) {
       console.error("Error updating wallet state:", error);
