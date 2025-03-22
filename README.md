@@ -1,69 +1,97 @@
-# Welcome to your Lovable project
 
-## Project info
+# 288 Token Ecosystem
 
-**URL**: https://lovable.dev/projects/ed78388c-9997-430c-81a8-08dc61d2b24a
+The 288 Token is a utility token powering an exclusive financial ecosystem, combining the benefits of decentralized finance (DeFi) with the robust services of a licensed EU-based securities brokerage, STAK Securities Ltd.
 
-## How can I edit this code?
+## Overview
 
-There are several ways of editing your application.
+Operating on the Arbitrum blockchain, the 288 Token provides holders with privileged access to a full suite of trading and investment services. With a fixed supply of 8 billion tokens, it serves as the core enabler for staking, rewards, and premium features within the platform.
 
-**Use Lovable**
+## Features
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/ed78388c-9997-430c-81a8-08dc61d2b24a) and start prompting.
+- **Staking Benefits**: Zero-commission trading, institutional-grade spreads, discounted custody and subscription fees
+- **Tiered Rewards**: Higher interest rates on deposits and exclusive access to private investment opportunities
+- **Revenue Sharing**: Up to 18% of the brokerage's revenue allocated to reward token stakers
 
-Changes made via Lovable will be committed automatically to this repo.
+## Smart Contracts
 
-**Use your preferred IDE**
+The ecosystem is powered by the following smart contracts:
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- **Token288**: Standard ERC20 token with a fixed supply of 8 billion tokens
+- **Staking288**: Enables token staking with reward distribution and loyalty-based benefits
+- **Vesting288**: Handles token vesting schedules for different participant types
+- **RevenueDistributor**: Distributes brokerage revenue to active stakers
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Technology Stack
 
-Follow these steps:
+- **Frontend**: React, TypeScript, Tailwind CSS, shadcn/ui
+- **Blockchain Integration**: ethers.js
+- **Smart Contracts**: Solidity, OpenZeppelin
+- **Blockchain**: Arbitrum
 
+## Getting Started
+
+### Prerequisites
+
+- Node.js & npm
+- MetaMask or other Web3 wallet
+
+### Installation
+
+1. Clone the repository:
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+git clone <repository-url>
+cd 288-token-dapp
+```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+2. Install dependencies:
+```sh
+npm install
+```
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+3. Start the development server:
+```sh
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+### Connecting Your Wallet
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+1. Click the "Connect Wallet" button in the app
+2. Select your preferred wallet provider
+3. Authorize the connection
+4. You'll now have access to your personalized dashboard
 
-**Use GitHub Codespaces**
+## User Guide
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### Dashboard
 
-## What technologies are used for this project?
+The dashboard provides an overview of your token holdings, staking status, and available rewards.
 
-This project is built with .
+### Staking
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Stake your 288 Tokens to earn rewards and unlock platform benefits:
+- Minimum staking period: 30 days
+- Rewards based on amount staked and duration
+- Tiered benefits unlocked at different staking levels
 
-## How can I deploy this project?
+### Vesting
 
-Simply open [Lovable](https://lovable.dev/projects/ed78388c-9997-430c-81a8-08dc61d2b24a) and click on Share -> Publish.
+For investors with vested tokens:
+- Track your vesting schedule
+- Claim tokens as they become available
+- Option to stake vested tokens directly
 
-## I want to use a custom domain - is that possible?
+### Revenue Sharing
 
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+Participate in the platform's success:
+- View your share of allocated brokerage revenue
+- Claim rewards at regular intervals
+- Track your earning history
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
