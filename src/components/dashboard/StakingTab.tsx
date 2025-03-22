@@ -7,6 +7,7 @@ interface StakingData {
   tokenBalance: string;
   stakedAmount: string;
   claimableRewards: string;
+  stakingTier?: string; // Added this property as optional
 }
 
 const StakingTab: React.FC<{userData: StakingData}> = ({ userData }) => {

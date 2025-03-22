@@ -64,7 +64,12 @@ const Dashboard = () => {
       
       {/* Staking Tab */}
       <TabsContent value="staking">
-        <StakingTab userData={userData} />
+        <StakingTab userData={{
+          tokenBalance: userData.tokenBalance,
+          stakedAmount: userData.stakedAmount,
+          claimableRewards: userData.claimableRewards,
+          stakingTier: userData.stakingTier // Explicitly passing stakingTier
+        }} />
       </TabsContent>
       
       {/* Vesting Tab */}
